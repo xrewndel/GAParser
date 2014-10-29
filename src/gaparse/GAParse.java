@@ -27,7 +27,7 @@ public class GAParse {
     private final static Logger log = Logger.getLogger(GAParse.class.getSimpleName());
     private static String path = "";
     private static List<Stat> stats = new LinkedList<>();
-    Map s;
+    private final static String pattern = "ga-(\\d){4}-(\\d){2}-(\\d){2}(.*log)"; //ga-2014-10-24 17-18-21-cross_10-mutate_10.log
     
     public static void main(String[] args) {
         int cross = -1;
@@ -142,7 +142,8 @@ public class GAParse {
     public static File[] getFilesInDir(String path) {
         File[] files = new File(path).listFiles(new FilenameFilter() {
             @Override public boolean accept(File directory, String fileName) {
-                return fileName.endsWith(".log");
+                //return fileName.endsWith(".log");
+                return fileName.matches(pattern);
             }
         });
         
