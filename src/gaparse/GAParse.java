@@ -66,15 +66,15 @@ public class GAParse {
                     default: System.out.println("Param " + q[0] + " is unknown");
                 }
             }
-            log.info("Cross: " + cross);
-            log.info("Mutate: " + mutate);
-            log.info("Free rate: " + fr);
-            log.info("Waste rate: " + wr);
+            log.debug("Cross: " + cross);
+            log.debug("Mutate: " + mutate);
+            log.debug("Free rate: " + fr);
+            log.debug("Waste rate: " + wr);
             
             // среднее считать - за сколько поколений в среднем достигается максимальнй фитнес - проще в расчетах писать и пихать в файл
             try {
                 Map map = read(file.getAbsolutePath());
-                log.info("Map: " + map);
+                log.debug("Map: " + map);
                 List<Double> fitness = (List<Double>) map.get("fitness");
                 log.info("Fitness: " + fitness);
                 if (fr == -1) {
@@ -114,9 +114,9 @@ public class GAParse {
         
         Map<String, Double> mapGen = new HashMap<>();
         for (Stat st : stats) {
-            log.info("Stat: " + st.toString());
-            log.info("Sum: " + st.sumGen());
-            log.info("Avg: " + st.avgGen());
+            log.debug("Stat: " + st.toString());
+            log.debug("Sum: " + st.sumGen());
+            log.debug("Avg: " + st.avgGen());
             mapGen.put(st.simpleid(), st.avgGen());
         }
         Map<String, Double> sortedMapGen = sortByComparator(mapGen);
@@ -129,14 +129,15 @@ public class GAParse {
         for (Stat st : stats) mapFitness.put(st.id(), st.avgFitness());
         Map<String, Double> sortedMapFitness = sortByComparator(mapFitness);
         
-        log.info("Map: " + mapGen);
-        log.info("");
-        log.info("Sorted by generation (from best to worst): "); printMap(sortedMapGen);
-        log.info("");
-        log.info("Sorted by time, sec (from best to worst): "); printMap(sortedMapTime);
-        log.info("");
-        log.info("Sorted by fitness (from worst to best): "); printMap(sortedMapFitness);
-        log.info("Best fitness: " + bestFitness + ". Fr: " + bestfr + ". Wr: " + bestwr + ". File: " + bestFile);
+        log.debug("Map: " + mapGen);
+        log.debug("");
+        log.debug("Sorted by generation (from best to worst): "); printMap(sortedMapGen);
+        log.debug("");
+        log.debug("Sorted by time, sec (from best to worst): "); printMap(sortedMapTime);
+        log.debug("");
+        log.debug("Sorted by fitness (from worst to best): "); printMap(sortedMapFitness);
+        log.info("Parsed files: " + files.length);
+        log.info("Best fitness: " + bestFitness + ". File: " + bestFile);
     }
     
     public static File[] getFilesInDir(String path) {
@@ -172,8 +173,8 @@ public class GAParse {
     }
     
     public static void printMap(Map<String, Double> map){
-        log.info("Cross|Mutation|FreeRate|WasteRate|Fitness");
-        for (String s : map.keySet()) { log.info(s + "       | " + map.get(s)); }
+        log.debug("Cross|Mutation|FreeRate|WasteRate|Fitness");
+        for (String s : map.keySet()) { log.debug(s + "       | " + map.get(s)); }
     }
     
     // Чтение локального файла построчно
