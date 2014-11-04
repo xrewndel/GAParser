@@ -45,8 +45,8 @@ public class GAParse {
         // set path
         if (args.length > 1) path = args[1];
         // лучше называть каталог с результатами осмысленно :)
-        String dir = path.substring(path.lastIndexOf("\\") + 1).replace("_", "");
-        System.setProperty("mydir", dir);
+        //String dir = path.substring(path.lastIndexOf("\\") + 1).replace("_", "");
+        //System.setProperty("mydir", dir);
         File cfgFile = new File(args[0]);
         PropertyConfigurator.configure(cfgFile.getAbsolutePath());
         
